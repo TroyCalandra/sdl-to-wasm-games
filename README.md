@@ -1,11 +1,35 @@
-# sdl-to-wasm-games
-A compilation of games built with C and SDL compiled to WebAssembly through [Emscripten](https://emscripten.org/).
+## C to WASM games
+a compilation of games built with C and SDL compiled to WebAssembly through [Emscripten](https://emscripten.org/).
 
-## Games
-For now, only two games are added: Snake and Asteroids. Both games are written in C with SDL, and are compiled to WebAssembly through Emscripten.
+## Pre reqs
+https://github.com/emscripten-core/emsdk
+CMake
+Git
 
-## Previews
-Snake: https://kibebr.github.io/sdl-to-wasm-games/
+## Snake Compile to WASM
+Compile to single file
+```
+snake/src/ $ emcc -o single.html *.c -s WASM=1 -s SINGLE_FILE=1 -s USE_SDL=2
+```
+or
 
-## How?
-I wrote an article on how to easily make those games run in a web browser, [check it out!](https://medium.com/swlh/i-made-a-game-in-c-run-in-a-web-browser-and-so-can-you-2911b9fe2368?sk=b839987dd50740634c898d90d7673bc7)
+Compile to multiple files
+```
+snake/src/ $ emcc -o output.html *.c -s USE_SDL=2
+```
+Run
+```
+npx http-server .
+```
+
+## Snake Compile to Native
+Compile
+```
+snake/src/ $ clang -o program main.c `pkg-config --cflags --libs sdl2` ./snake.c ./apple.c
+```
+Run
+```
+./program
+```
+## Tutorial
+https://dev.to/kibebr/i-made-a-game-in-c-run-in-a-web-browser-and-so-can-you-4deb
